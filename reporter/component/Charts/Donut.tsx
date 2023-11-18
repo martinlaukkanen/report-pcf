@@ -8,7 +8,7 @@ export interface IDonutProps extends IChartBaseProps {
 }
 
 export const Donut = React.memo<IDonutProps>(function Donut(props: IDonutProps) {
-	const { width, height } = props;
+	const { width, height, innerRadius } = props;
 
 	const [options, setOptions] = useState<AgPolarChartOptions>({
 		data: [
@@ -24,7 +24,7 @@ export const Donut = React.memo<IDonutProps>(function Donut(props: IDonutProps) 
 				type: 'pie',
 				calloutLabelKey: 'os',
 				angleKey: 'share',
-				innerRadiusRatio: 0.6,
+				innerRadiusRatio: innerRadius ?? 0.6,
 			},
 		],
 	});

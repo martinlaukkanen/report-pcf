@@ -2,6 +2,7 @@ import React from 'react';
 import { IInputs } from '../generated/ManifestTypes';
 import { ChartType } from '../types';
 import { Donut, Bar } from './Charts';
+import { Dataservice } from '../services/Dataservice';
 
 export interface IAppProps {
 	context: ComponentFramework.Context<IInputs>;
@@ -11,19 +12,45 @@ export interface IAppProps {
 
 export const App: React.FC<IAppProps> = (props: IAppProps) => {
 	const { allocatedHeight, allocatedWidth } = props;
-	const { chartType } = props.context.parameters;
+	const { chartType, chartTitle, chartSubtitle } = props.context.parameters;
 	const width = Number(allocatedWidth);
 	const height = Number(allocatedHeight);
 
+	const service = new Dataservice(props.context.parameters.tableData, props.context.parameters);
+	const data = service.transformData();
+	const chartAxes = service.getChartAxes();
+
+	if (!data.length || data[0].name === 'val') {
+		return <span>No data!</span>;
+	}
+
 	switch (chartType.raw) {
 		case ChartType.Donut:
-			return <Donut width={width} height={height} />;
+			return (
+				<Donut
+					width={width}
+					height={height}
+					data={data}
+					axes={chartAxes}
+					title={chartTitle.raw}
+					subtitle={chartSubtitle.raw}
+				/>
+			);
 
 		case ChartType.Pie:
 			return <span>No pie!</span>;
 
 		case ChartType.Bar:
-			return <Bar width={width} height={height} />;
+			return (
+				<Bar
+					width={width}
+					height={height}
+					data={data}
+					axes={chartAxes}
+					title={chartTitle.raw}
+					subtitle={chartSubtitle.raw}
+				/>
+			);
 
 		default:
 			return <span>No chart type!</span>;

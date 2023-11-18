@@ -1,5 +1,5 @@
+import React from 'react';
 import { IInputs, IOutputs } from './generated/ManifestTypes';
-import * as React from 'react';
 import { App, IAppProps } from './component/App';
 
 export class Reporter implements ComponentFramework.ReactControl<IInputs, IOutputs> {
@@ -9,7 +9,7 @@ export class Reporter implements ComponentFramework.ReactControl<IInputs, IOutpu
 	/**
 	 * Empty constructor.
 	 */
-	constructor() {}
+	// constructor() {}
 
 	/**
 	 * Used to initialize the control instance. Controls can kick off remote server calls and other initialization actions here.

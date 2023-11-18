@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AgChartsReact } from 'ag-charts-react';
-import { AgCartesianChartOptions } from 'ag-charts-community';
+import { AgCartesianChartOptions, AgCartesianSeriesOptions, AgChartCaptionOptions } from 'ag-charts-community';
 import { IChartBaseProps } from '../../types/IChartBaseProps';
 
 export interface IBarProps extends IChartBaseProps {
@@ -8,89 +8,34 @@ export interface IBarProps extends IChartBaseProps {
 }
 
 export const Bar = React.memo<IBarProps>(function Donut(props: IBarProps) {
-	const { width, height } = props;
+	const { data, width, height, type, axes, title, subtitle } = props;
+	const category1 = axes.categories[0];
+	const series1 = axes.series[0].field;
+
+	const series: AgCartesianSeriesOptions<never>[] = [
+		{
+			type: 'column',
+			xKey: category1,
+			yKey: series1,
+		},
+	];
+
+	const titleConfig: AgChartCaptionOptions | undefined = title
+		? {
+				text: title,
+		  }
+		: undefined;
+	const subtitleConfig: AgChartCaptionOptions | undefined = subtitle
+		? {
+				text: subtitle,
+		  }
+		: undefined;
 
 	const [options, setOptions] = useState<AgCartesianChartOptions>({
-		title: {
-			text: "Apple's revenue by product category",
-		},
-		subtitle: {
-			text: 'in billion U.S. dollars',
-		},
-		series: [
-			{
-				type: 'column',
-				xKey: 'quarter',
-				yKey: 'iphone',
-			},
-		],
-		data: [
-			{
-				quarter: "Q1'18",
-				iphone: 140,
-				mac: 16,
-				ipad: 14,
-				wearables: 12,
-				services: 20,
-			},
-			{
-				quarter: "Q2'18",
-				iphone: 124,
-				mac: 20,
-				ipad: 14,
-				wearables: 12,
-				services: 30,
-			},
-			{
-				quarter: "Q3'18",
-				iphone: 112,
-				mac: 20,
-				ipad: 18,
-				wearables: 14,
-				services: 36,
-			},
-			{
-				quarter: "Q4'18",
-				iphone: 118,
-				mac: 24,
-				ipad: 14,
-				wearables: 14,
-				services: 36,
-			},
-			{
-				quarter: "Q1'19",
-				iphone: 124,
-				mac: 18,
-				ipad: 16,
-				wearables: 18,
-				services: 26,
-			},
-			{
-				quarter: "Q2'19",
-				iphone: 108,
-				mac: 20,
-				ipad: 16,
-				wearables: 18,
-				services: 40,
-			},
-			{
-				quarter: "Q3'19",
-				iphone: 96,
-				mac: 22,
-				ipad: 18,
-				wearables: 24,
-				services: 42,
-			},
-			{
-				quarter: "Q4'19",
-				iphone: 104,
-				mac: 22,
-				ipad: 14,
-				wearables: 20,
-				services: 40,
-			},
-		],
+		title: titleConfig,
+		subtitle: subtitleConfig,
+		data,
 	});
 
-	return <AgChartsReact options={{ ...options, width, height }} />;
+	return <AgChartsReact options={{ ...options, series, width, height }} />;
 });
