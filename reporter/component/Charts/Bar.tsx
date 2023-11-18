@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { AgChartsReact } from 'ag-charts-react';
-import { AgCartesianChartOptions, AgCartesianSeriesOptions, AgChartCaptionOptions } from 'ag-charts-community';
+import { AgCartesianSeriesOptions, AgChartCaptionOptions } from 'ag-charts-community';
 import { IChartBaseProps } from '../../types/IChartBaseProps';
 
 export interface IBarProps extends IChartBaseProps {
@@ -25,17 +25,12 @@ export const Bar = React.memo<IBarProps>(function Donut(props: IBarProps) {
 				text: title,
 		  }
 		: undefined;
+
 	const subtitleConfig: AgChartCaptionOptions | undefined = subtitle
 		? {
 				text: subtitle,
 		  }
 		: undefined;
 
-	const [options, setOptions] = useState<AgCartesianChartOptions>({
-		title: titleConfig,
-		subtitle: subtitleConfig,
-		data,
-	});
-
-	return <AgChartsReact options={{ ...options, series, width, height }} />;
+	return <AgChartsReact options={{ title: titleConfig, subtitle: subtitleConfig, series, width, height, data }} />;
 });

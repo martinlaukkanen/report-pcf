@@ -16,9 +16,10 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
 	const width = Number(allocatedWidth);
 	const height = Number(allocatedHeight);
 
-	const service = new Dataservice(props.context.parameters.tableData, props.context.parameters);
-	const data = service.transformData();
-	const chartAxes = service.getChartAxes();
+	const service = new Dataservice();
+	const data = service.transformData(props.context.parameters.tableData);
+	const settings = service.getChartAxes(props.context.parameters);
+	const aggregate = service.aggregateData(data, settings);
 
 	if (!data.length || data[0].name === 'val') {
 		return <span>No data!</span>;
@@ -30,8 +31,8 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
 				<Donut
 					width={width}
 					height={height}
-					data={data}
-					axes={chartAxes}
+					data={aggregate}
+					axes={settings}
 					title={chartTitle.raw}
 					subtitle={chartSubtitle.raw}
 				/>
@@ -45,8 +46,8 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
 				<Bar
 					width={width}
 					height={height}
-					data={data}
-					axes={chartAxes}
+					data={aggregate}
+					axes={settings}
 					title={chartTitle.raw}
 					subtitle={chartSubtitle.raw}
 				/>

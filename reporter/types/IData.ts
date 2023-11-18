@@ -6,3 +6,8 @@ export interface IData {
 		[key: string]: any;
 	};
 }
+
+export interface IAggregate {
+	id: number | string;
+	[key: string]: any;
+}
