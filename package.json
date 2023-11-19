@@ -1,6 +1,6 @@
 {
   "name": "report-pcf",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "Easy charts PowerApps Component",
   "scripts": {
     "build": "pcf-scripts build",
@@ -9,7 +9,8 @@
     "lint:fix": "pcf-scripts lint fix",
     "rebuild": "pcf-scripts rebuild",
     "start": "cross-env NODE_ENV=development pcf-scripts start watch",
-    "refreshTypes": "pcf-scripts refreshTypes"
+    "refreshTypes": "pcf-scripts refreshTypes",
+    "package": "msbuild ./Solution /t:clean;restore & msbuild ./Solution /t:build /property:configuration=Release"
   },
   "dependencies": {
     "@fluentui/react": "8.29.0",

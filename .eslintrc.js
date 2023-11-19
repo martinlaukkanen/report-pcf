@@ -89,5 +89,6 @@ module.exports = {
 				unnamedComponents: 'arrow-function',
 			},
 		],
+		'import/no-unresolved': [2, { caseSensitive: false }],
 	},
 };

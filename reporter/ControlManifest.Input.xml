@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="hope" constructor="Reporter" version="0.0.1" display-name-key="Easy Charts" description-key="Easy Charts PowerApps Component" control-type="virtual">
+  <control namespace="nb" constructor="Reporter" version="0.2.0" display-name-key="Easy Charts" description-key="Easy Charts PowerApps Component" control-type="virtual">
     <external-service-usage enabled="false">
     </external-service-usage>
     <data-set name="tableData" display-name-key="TableData_Display_Key" description-key="TableData_Desc_Key">
@@ -9,8 +9,8 @@
       <value name="Donut" display-name-key="Property_ChartType_Donut_Display_Name">donut</value>
       <value name="Pie" display-name-key="Property_ChartType_Pie_Display_Name">pie</value>
       <value name="Bar" display-name-key="Property_ChartType_Bar_Display_Name">bar</value>
-      <value name="Area" display-name-key="Property_ChartType_Bar_Display_Name">area</value>
-      <value name="Line" display-name-key="Property_ChartType_Bar_Display_Name">line</value>
+      <value name="Area" display-name-key="Property_ChartType_Area_Display_Name">area</value>
+      <value name="Line" display-name-key="Property_ChartType_Line_Display_Name">line</value>
     </property>
     <property name="chartTitle" display-name-key="Chart Title" description-key="" of-type="SingleLine.Text" usage="input" required="false" />
     <property name="chartSubtitle" display-name-key="Chart Subtitle" description-key="" of-type="SingleLine.Text" usage="input" required="false" />
@@ -20,7 +20,7 @@
       <value name="Sum" display-name-key="Sum">sum</value>
       <value name="Min" display-name-key="Min">min</value>
       <value name="Max" display-name-key="Max">max</value>
-      <value name="Count" display-name-key="Max">count</value>
+      <value name="Count" display-name-key="Count">count</value>
     </property>
     <property name="series2" display-name-key="Series 2" description-key="" of-type="SingleLine.Text" usage="input" required="false" />
     <property name="series2agg" display-name-key="Series 2 Aggregation" description-key="" of-type="Enum" usage="input" required="false">
