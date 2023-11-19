@@ -6,9 +6,11 @@
     <data-set name="tableData" display-name-key="TableData_Display_Key" description-key="TableData_Desc_Key">
     </data-set>
     <property name="chartType" display-name-key="Property_ChartType_Display_Name" description-key="Property_ChartType_Description" of-type="Enum" usage="input" required="true">
-      <value name="Donut" display-name-key="Property_ChartType_Donut_Display_Name">Donut</value>
-      <value name="Pie" display-name-key="Property_ChartType_Pie_Display_Name">Pie</value>
-      <value name="Bar" display-name-key="Property_ChartType_Bar_Display_Name">Bar</value>
+      <value name="Donut" display-name-key="Property_ChartType_Donut_Display_Name">donut</value>
+      <value name="Pie" display-name-key="Property_ChartType_Pie_Display_Name">pie</value>
+      <value name="Bar" display-name-key="Property_ChartType_Bar_Display_Name">bar</value>
+      <value name="Area" display-name-key="Property_ChartType_Bar_Display_Name">area</value>
+      <value name="Line" display-name-key="Property_ChartType_Bar_Display_Name">line</value>
     </property>
     <property name="chartTitle" display-name-key="Chart Title" description-key="" of-type="SingleLine.Text" usage="input" required="false" />
     <property name="chartSubtitle" display-name-key="Chart Subtitle" description-key="" of-type="SingleLine.Text" usage="input" required="false" />

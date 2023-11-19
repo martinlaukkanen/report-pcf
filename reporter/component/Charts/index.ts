@@ -1,2 +1,3 @@
-export * from './Donut';
-export * from './Bar';
+export * from './Pie';
+export * from './Chart';
+export * from './Cartesian';

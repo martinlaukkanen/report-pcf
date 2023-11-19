@@ -32,7 +32,6 @@ export class Dataservice {
 			data.push(row);
 		});
 
-		console.log(data);
 		return data;
 	};
 
@@ -95,7 +94,7 @@ export class Dataservice {
 
 	private groupBy<T>(array: T[], key: keyof T): GroupedObjects<T> {
 		return array.reduce((result: GroupedObjects<T>, currentItem: T) => {
-			const keyValue = currentItem[key] as string; // Ensure key is a string for simplicity
+			const keyValue = currentItem[key] as string;
 
 			if (!result[keyValue]) {
 				result[keyValue] = [];

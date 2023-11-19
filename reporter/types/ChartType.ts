@@ -1,6 +1,8 @@
 // eslint-disable-next-line no-shadow
 export enum ChartType {
-	Donut = 'Donut',
-	Pie = 'Pie',
-	Bar = 'Bar',
+	Donut = 'donut',
+	Pie = 'pie',
+	Bar = 'bar',
+	Area = 'area',
+	Line = 'line',
 }

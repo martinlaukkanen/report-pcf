@@ -1,8 +1,9 @@
+/* eslint-disable no-fallthrough */
 import React from 'react';
 import { IInputs } from '../generated/ManifestTypes';
 import { ChartType } from '../types';
-import { Donut, Bar } from './Charts';
 import { Dataservice } from '../services/Dataservice';
+import { Cartesian, Pie } from './Charts';
 
 export interface IAppProps {
 	context: ComponentFramework.Context<IInputs>;
@@ -21,29 +22,36 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
 	const settings = service.getChartAxes(props.context.parameters);
 	const aggregate = service.aggregateData(data, settings);
 
+	// No data or mock test env
 	if (!data.length || data[0].name === 'val') {
 		return <span>No data!</span>;
 	}
 
+	// Default radius for Pie chart
+	let innerRadius = 0;
+
 	switch (chartType.raw) {
 		case ChartType.Donut:
+			innerRadius = 0.6;
+		case ChartType.Pie:
 			return (
-				<Donut
+				<Pie
 					width={width}
 					height={height}
 					data={aggregate}
 					axes={settings}
 					title={chartTitle.raw}
 					subtitle={chartSubtitle.raw}
+					innerRadius={innerRadius}
 				/>
 			);
 
-		case ChartType.Pie:
-			return <span>No pie!</span>;
-
 		case ChartType.Bar:
+		case ChartType.Area:
+		case ChartType.Line:
 			return (
-				<Bar
+				<Cartesian
+					type={chartType.raw}
 					width={width}
 					height={height}
 					data={aggregate}
