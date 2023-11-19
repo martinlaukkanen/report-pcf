@@ -94,7 +94,12 @@ export class Dataservice {
 
 	private groupBy<T>(array: T[], key: keyof T): GroupedObjects<T> {
 		return array.reduce((result: GroupedObjects<T>, currentItem: T) => {
-			const keyValue = currentItem[key] as string;
+			let keyValue = currentItem[key] as any; // as string;
+
+			// Lookup field type?
+			if (keyValue?.name) {
+				keyValue = keyValue.name;
+			}
 
 			if (!result[keyValue]) {
 				result[keyValue] = [];

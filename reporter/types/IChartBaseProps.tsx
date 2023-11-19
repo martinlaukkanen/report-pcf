@@ -1,4 +1,4 @@
-import { IAggregate, IData } from './IData';
+import { IAggregate } from './IData';
 import { IAxes } from './IAxes';
 
 export interface IChartBaseProps {

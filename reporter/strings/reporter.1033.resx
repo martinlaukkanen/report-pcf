@@ -86,4 +86,10 @@
 	<data name="Property_ChartType_Bar_Display_Name" xml:space="preserve">
 		<value>Bar</value>
 	</data>
+	<data name="Property_ChartType_Area_Display_Name" xml:space="preserve">
+		<value>Area</value>
+	</data>
+	<data name="Property_ChartType_Line_Display_Name" xml:space="preserve">
+		<value>Line</value>
+	</data>
 </root>

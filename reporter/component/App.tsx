@@ -14,8 +14,16 @@ export interface IAppProps {
 export const App: React.FC<IAppProps> = (props: IAppProps) => {
 	const { allocatedHeight, allocatedWidth } = props;
 	const { chartType, chartTitle, chartSubtitle } = props.context.parameters;
-	const width = Number(allocatedWidth);
-	const height = Number(allocatedHeight);
+
+	let width = Number(allocatedWidth);
+	let height = Number(allocatedHeight);
+	if (width === -1) {
+		width = 350;
+	}
+	if (height === -1) {
+		height = 400;
+	}
+	console.log(width, height);
 
 	const service = new Dataservice();
 	const data = service.transformData(props.context.parameters.tableData);
