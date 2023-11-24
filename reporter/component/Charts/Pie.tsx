@@ -13,7 +13,7 @@ export const Pie = React.memo<IPieProps>(function Pie(props: IPieProps) {
 	const series: AgPolarSeriesOptions[] = [
 		{
 			type: 'pie',
-			calloutLabelKey: axes.categories[0],
+			calloutLabelKey: axes.categories[0].label,
 			angleKey: axes.series[0].field,
 			innerRadiusRatio: innerRadius,
 		},

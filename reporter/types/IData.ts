@@ -9,5 +9,6 @@ export interface IData {
 
 export interface IAggregate {
 	id: number | string;
+	label: string;
 	[key: string]: any;
 }

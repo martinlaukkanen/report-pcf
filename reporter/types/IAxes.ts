@@ -7,7 +7,12 @@ export interface Series {
 	aggregate: 'avg' | 'sum' | 'min' | 'max' | 'count';
 }
 
+export interface ICategory {
+	field: string;
+	label: string;
+}
+
 export interface IAxes {
-	categories: string[];
+	categories: ICategory[];
 	series: Series[];
 }

@@ -46,11 +46,17 @@ export class Dataservice {
 			throw new Error('Category 1 or Series 1 not configured');
 		}
 
-		settings.categories.push(category1.raw);
 		settings.series.push({
 			field: series1.raw,
 			aggregate: series1agg.raw,
 		});
+
+		const category = { label: category1.raw, field: category1.raw };
+		if (series1agg.raw === 'count') {
+			category.label = 'label';
+		}
+
+		settings.categories.push(category);
 
 		// TODO: other categories and series
 
@@ -62,11 +68,16 @@ export class Dataservice {
 		const categoryField = categories[0];
 		const { aggregate, field } = settings.series[0];
 
-		const grouped = this.groupBy<IData>(data, categoryField);
+		const grouped = this.groupBy<IData>(data, categoryField.field);
 
 		// Now apply the aggregate function
-		const aggregated: IAggregate[] = Object.keys(grouped).map((category, id) => {
-			const val: IAggregate = { id, [categoryField]: category };
+		const aggregated: IAggregate[] = Object.keys(grouped).map((category) => {
+			const id = grouped[category]?.[0]?.[categoryField.field]?.id?.guid ?? category;
+			// Get the formatted value of this label
+			const label =
+				grouped[category]?.[0]?.[categoryField.field].name ?? grouped[category]?.[0]?.[categoryField.field];
+			const val: IAggregate = { id, label, [categoryField.field]: category };
+
 			switch (aggregate) {
 				case 'avg':
 					val[field] = this.avgByKey(grouped[category], field);
@@ -81,13 +92,14 @@ export class Dataservice {
 					val[field] = this.minByKey(grouped[category], field);
 					break;
 				case 'count':
+					val.label = grouped[category]?.[0]?.formattedValues[field] ?? '';
 					val[field] = grouped[category]?.length;
 					break;
 			}
 			return val;
 		});
 
-		// console.log(aggregated);
+		console.log(aggregated);
 
 		return aggregated;
 	};

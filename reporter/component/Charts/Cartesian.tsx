@@ -15,7 +15,7 @@ export const Cartesian = React.memo<ICartesianProps>(function Cartesian(props: I
 	const series: AgCartesianSeriesOptions<never>[] = [
 		{
 			type,
-			xKey: category1,
+			xKey: category1.label,
 			yKey: series1,
 		},
 	];

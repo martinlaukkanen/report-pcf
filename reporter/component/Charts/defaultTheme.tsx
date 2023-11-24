@@ -23,6 +23,9 @@ export const defaultTheme: AgChartTheme = {
 							fill: 'white',
 							fillOpacity: 0.4,
 						},
+						series: {
+							dimOpacity: 0.3,
+						},
 					},
 				},
 				column: {
@@ -30,6 +33,9 @@ export const defaultTheme: AgChartTheme = {
 						item: {
 							fill: 'white',
 							fillOpacity: 0.4,
+						},
+						series: {
+							dimOpacity: 0.3,
 						},
 					},
 				},
