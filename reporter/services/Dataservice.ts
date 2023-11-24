@@ -87,7 +87,7 @@ export class Dataservice {
 			return val;
 		});
 
-		console.log(aggregated);
+		// console.log(aggregated);
 
 		return aggregated;
 	};

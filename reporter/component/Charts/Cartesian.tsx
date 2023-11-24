@@ -8,7 +8,7 @@ export interface ICartesianProps extends IChartBaseProps {
 }
 
 export const Cartesian = React.memo<ICartesianProps>(function Cartesian(props: ICartesianProps) {
-	const { data, width, height, axes, type, title, subtitle } = props;
+	const { data, axes, type, title, subtitle } = props;
 	const category1 = axes.categories[0];
 	const series1 = axes.series[0].field;
 
@@ -20,15 +20,5 @@ export const Cartesian = React.memo<ICartesianProps>(function Cartesian(props: I
 		},
 	];
 
-	return (
-		<Chart
-			series={series}
-			data={data}
-			width={width}
-			height={height}
-			title={title}
-			subtitle={subtitle}
-			axes={axes}
-		/>
-	);
+	return <Chart series={series} data={data} title={title} subtitle={subtitle} axes={axes} />;
 });

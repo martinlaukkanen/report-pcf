@@ -1,5 +1,5 @@
 /* eslint-disable no-fallthrough */
-import React from 'react';
+import React, { useState } from 'react';
 import { IInputs } from '../generated/ManifestTypes';
 import { ChartType } from '../types';
 import { Dataservice } from '../services/Dataservice';
@@ -7,23 +7,11 @@ import { Cartesian, Pie } from './Charts';
 
 export interface IAppProps {
 	context: ComponentFramework.Context<IInputs>;
-	allocatedHeight: number;
-	allocatedWidth: number;
 }
 
 export const App: React.FC<IAppProps> = (props: IAppProps) => {
-	const { allocatedHeight, allocatedWidth } = props;
-	const { chartType, chartTitle, chartSubtitle } = props.context.parameters;
-
-	let width = Number(allocatedWidth);
-	let height = Number(allocatedHeight);
-	if (width === -1) {
-		width = 350;
-	}
-	if (height === -1) {
-		height = 400;
-	}
-	console.log(width, height);
+	const { context } = props;
+	const { chartType, chartTitle, chartSubtitle } = context.parameters;
 
 	const service = new Dataservice();
 	const data = service.transformData(props.context.parameters.tableData);
@@ -44,8 +32,6 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
 		case ChartType.Pie:
 			return (
 				<Pie
-					width={width}
-					height={height}
 					data={aggregate}
 					axes={settings}
 					title={chartTitle.raw}
@@ -60,8 +46,6 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
 			return (
 				<Cartesian
 					type={chartType.raw}
-					width={width}
-					height={height}
 					data={aggregate}
 					axes={settings}
 					title={chartTitle.raw}

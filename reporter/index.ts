@@ -23,7 +23,6 @@ export class Reporter implements ComponentFramework.ReactControl<IInputs, IOutpu
 		notifyOutputChanged: () => void,
 		state: ComponentFramework.Dictionary
 	): void {
-		context.mode.trackContainerResize(true);
 		this.notifyOutputChanged = notifyOutputChanged;
 	}
 
@@ -33,8 +32,7 @@ export class Reporter implements ComponentFramework.ReactControl<IInputs, IOutpu
 	 * @returns ReactElement root react element for the control
 	 */
 	public updateView(context: ComponentFramework.Context<IInputs>): React.ReactElement {
-		const { allocatedHeight, allocatedWidth } = context.mode;
-		const props: IAppProps = { context, allocatedHeight, allocatedWidth };
+		const props: IAppProps = { context };
 
 		return React.createElement(App, props);
 	}

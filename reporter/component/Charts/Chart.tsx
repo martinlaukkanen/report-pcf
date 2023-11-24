@@ -8,7 +8,7 @@ export interface IChartProps extends IChartBaseProps {
 }
 
 export const Chart: React.FC<IChartProps> = (props: IChartProps) => {
-	const { data, width, height, title, subtitle, series } = props;
+	const { data, title, subtitle, series } = props;
 
 	const titleConfig: AgChartCaptionOptions | undefined = title
 		? {
@@ -24,8 +24,10 @@ export const Chart: React.FC<IChartProps> = (props: IChartProps) => {
 
 	return (
 		// Series types are not all compatible so any
-		<AgChartsReact
-			options={{ title: titleConfig, subtitle: subtitleConfig, series: series as any, width, height, data }}
-		/>
+		<div style={{ width: '100%', height: '100%' }}>
+			<AgChartsReact
+				options={{ title: titleConfig, subtitle: subtitleConfig, series: series as any, autoSize: true, data }}
+			/>
+		</div>
 	);
 };

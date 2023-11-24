@@ -8,7 +8,7 @@ export interface IPieProps extends IChartBaseProps {
 }
 
 export const Pie = React.memo<IPieProps>(function Pie(props: IPieProps) {
-	const { width, height, data, axes, title, subtitle, innerRadius } = props;
+	const { data, axes, title, subtitle, innerRadius } = props;
 
 	const series: AgPolarSeriesOptions[] = [
 		{
@@ -19,15 +19,5 @@ export const Pie = React.memo<IPieProps>(function Pie(props: IPieProps) {
 		},
 	];
 
-	return (
-		<Chart
-			series={series}
-			data={data}
-			width={width}
-			height={height}
-			title={title}
-			subtitle={subtitle}
-			axes={axes}
-		/>
-	);
+	return <Chart series={series} data={data} title={title} subtitle={subtitle} axes={axes} />;
 });
