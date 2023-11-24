@@ -2,6 +2,8 @@ import React from 'react';
 import { AgChartsReact } from 'ag-charts-react';
 import { AgCartesianSeriesOptions, AgChartCaptionOptions, AgPolarSeriesOptions } from 'ag-charts-community';
 import { IChartBaseProps } from '../../types/IChartBaseProps';
+import { fluentTheme } from './fluentTheme';
+import { defaultTheme } from './defaultTheme';
 
 export interface IChartProps extends IChartBaseProps {
 	series?: AgCartesianSeriesOptions<never>[] | AgPolarSeriesOptions[];
@@ -23,10 +25,17 @@ export const Chart: React.FC<IChartProps> = (props: IChartProps) => {
 		: undefined;
 
 	return (
-		// Series types are not all compatible so any
 		<div style={{ width: '100%', height: '100%' }}>
 			<AgChartsReact
-				options={{ title: titleConfig, subtitle: subtitleConfig, series: series as any, autoSize: true, data }}
+				options={{
+					title: titleConfig,
+					subtitle: subtitleConfig,
+					// Series types are not all compatible so any
+					series: series as any,
+					autoSize: true,
+					data,
+					theme: defaultTheme,
+				}}
 			/>
 		</div>
 	);

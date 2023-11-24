@@ -1,6 +1,7 @@
 import React from 'react';
 import { IInputs, IOutputs } from './generated/ManifestTypes';
 import { App, IAppProps } from './component/App';
+import { IControlDescription } from './types';
 
 export class Reporter implements ComponentFramework.ReactControl<IInputs, IOutputs> {
 	private theComponent: ComponentFramework.ReactControl<IInputs, IOutputs>;
@@ -32,7 +33,10 @@ export class Reporter implements ComponentFramework.ReactControl<IInputs, IOutpu
 	 * @returns ReactElement root react element for the control
 	 */
 	public updateView(context: ComponentFramework.Context<IInputs>): React.ReactElement {
-		const props: IAppProps = { context };
+		// eslint-disable-next-line no-underscore-dangle
+		const controlProps: IControlDescription = (context.navigation as any)._customControlProperties?.descriptor;
+
+		const props: IAppProps = { context, controlProps };
 
 		return React.createElement(App, props);
 	}

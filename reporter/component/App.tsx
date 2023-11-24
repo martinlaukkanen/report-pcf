@@ -1,17 +1,19 @@
 /* eslint-disable no-fallthrough */
-import React, { useState } from 'react';
+import React from 'react';
 import { IInputs } from '../generated/ManifestTypes';
-import { ChartType } from '../types';
+import { ChartType, IControlDescription } from '../types';
 import { Dataservice } from '../services/Dataservice';
 import { Cartesian, Pie } from './Charts';
 
 export interface IAppProps {
 	context: ComponentFramework.Context<IInputs>;
+	controlProps?: IControlDescription;
 }
 
 export const App: React.FC<IAppProps> = (props: IAppProps) => {
-	const { context } = props;
-	const { chartType, chartTitle, chartSubtitle } = context.parameters;
+	const { context, controlProps } = props;
+	const { chartType, chartSubtitle } = context.parameters;
+	const title = controlProps?.ShowLabel ? controlProps.Label : null;
 
 	const service = new Dataservice();
 	const data = service.transformData(props.context.parameters.tableData);
@@ -34,7 +36,7 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
 				<Pie
 					data={aggregate}
 					axes={settings}
-					title={chartTitle.raw}
+					title={title}
 					subtitle={chartSubtitle.raw}
 					innerRadius={innerRadius}
 				/>
@@ -48,7 +50,7 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
 					type={chartType.raw}
 					data={aggregate}
 					axes={settings}
-					title={chartTitle.raw}
+					title={title}
 					subtitle={chartSubtitle.raw}
 				/>
 			);
