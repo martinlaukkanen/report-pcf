@@ -1,11 +1,10 @@
 import { IInputs } from '../generated/ManifestTypes';
-import { IAxes } from '../types';
-import { IAggregate, IData } from '../types/IData';
+import { IAxes, IAggregate, IData, IPicklistAttributeMetadata } from '../types';
 
 type GroupedObjects<T> = { [key: string]: T[] };
 
 export class Dataservice {
-	public transformData = (tableData: ComponentFramework.PropertyTypes.DataSet): IData[] => {
+	public static transformData = (tableData: ComponentFramework.PropertyTypes.DataSet): IData[] => {
 		const data: IData[] = [];
 		const { records, columns } = tableData;
 
@@ -35,8 +34,8 @@ export class Dataservice {
 		return data;
 	};
 
-	public getChartAxes = (parameters: IInputs): IAxes => {
-		const { category1, series1, series1agg, category2, series2, series2agg } = parameters;
+	public static getChartAxes = (parameters: IInputs): IAxes => {
+		const { category1, series1, series1agg, category2, series2, series2agg, tableData } = parameters;
 		const settings: IAxes = {
 			categories: [],
 			series: [],
@@ -51,6 +50,7 @@ export class Dataservice {
 			aggregate: series1agg.raw,
 		});
 
+		// Use different value for label for count
 		const category = { label: category1.raw, field: category1.raw };
 		if (series1agg.raw === 'count') {
 			category.label = 'label';
@@ -63,7 +63,46 @@ export class Dataservice {
 		return settings;
 	};
 
-	public aggregateData = (data: IData[], settings: IAxes): IAggregate[] => {
+	public static getChartColors = async (
+		axes: IAxes,
+		tableData: ComponentFramework.PropertyTypes.DataSet
+	): Promise<IAxes> => {
+		// eslint-disable-next-line no-restricted-syntax
+		for (const category of axes.categories) {
+			// Get option set colours
+			const categoryColumn = tableData.columns.find((c) => c.name === category.field);
+			if (categoryColumn?.dataType === 'OptionSet') {
+				const choiceField = await this.getOptionSetValues(tableData.getTargetEntityType(), categoryColumn.name);
+				category.colors = choiceField?.OptionSet?.Options?.map((opt) => opt.Color);
+				console.log(category);
+			}
+		}
+
+		return axes;
+	};
+
+	private static getOptionSetValues = async (
+		tableName: string,
+		fieldName: string
+	): Promise<IPicklistAttributeMetadata> => {
+		try {
+			const query =
+				`/api/data/v9.2/EntityDefinitions(LogicalName='${tableName}')/Attributes(LogicalName='${fieldName}')` +
+				`/Microsoft.Dynamics.CRM.PicklistAttributeMetadata?$select=LogicalName&$expand=OptionSet($select=Options)`;
+
+			const request = await fetch(query);
+
+			if (request.ok) {
+				return await request.json();
+			}
+
+			throw new Error(`Error loading OptionSet: ${request.status} ${request.statusText}`);
+		} catch (ex: any) {
+			throw new Error(ex.message);
+		}
+	};
+
+	public static aggregateData = (data: IData[], settings: IAxes): IAggregate[] => {
 		const { categories } = settings;
 		const categoryField = categories[0];
 		const { aggregate, field } = settings.series[0];
@@ -104,7 +143,7 @@ export class Dataservice {
 		return aggregated;
 	};
 
-	private groupBy<T>(array: T[], key: keyof T): GroupedObjects<T> {
+	private static groupBy<T>(array: T[], key: keyof T): GroupedObjects<T> {
 		return array.reduce((result: GroupedObjects<T>, currentItem: T) => {
 			let keyValue = currentItem[key] as any; // as string;
 
@@ -123,7 +162,7 @@ export class Dataservice {
 		}, {});
 	}
 
-	private avgByKey = <T>(array: T[], key: keyof T): number => {
+	private static avgByKey = <T>(array: T[], key: keyof T): number => {
 		const sum = array.reduce((accumulator, currentItem) => {
 			const propertyValue = currentItem[key] as number;
 			return accumulator + propertyValue;
@@ -132,7 +171,7 @@ export class Dataservice {
 		return sum / array.length;
 	};
 
-	private sumByKey = <T>(array: T[], key: keyof T): number => {
+	private static sumByKey = <T>(array: T[], key: keyof T): number => {
 		const sum = array.reduce((accumulator, currentItem) => {
 			const propertyValue = currentItem[key] as number;
 			return accumulator + propertyValue;
@@ -141,7 +180,7 @@ export class Dataservice {
 		return sum;
 	};
 
-	private maxByKey = <T>(array: T[], key: keyof T): number | undefined => {
+	private static maxByKey = <T>(array: T[], key: keyof T): number | undefined => {
 		if (array.length === 0) {
 			return undefined;
 		}
@@ -152,7 +191,7 @@ export class Dataservice {
 		}, Number.NEGATIVE_INFINITY);
 	};
 
-	private minByKey = <T>(array: T[], key: keyof T): number | undefined => {
+	private static minByKey = <T>(array: T[], key: keyof T): number | undefined => {
 		if (array.length === 0) {
 			return undefined;
 		}

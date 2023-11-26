@@ -16,6 +16,7 @@ export const Pie = React.memo<IPieProps>(function Pie(props: IPieProps) {
 			calloutLabelKey: axes.categories[0].label,
 			angleKey: axes.series[0].field,
 			innerRadiusRatio: innerRadius,
+			fills: axes.categories[0].colors,
 		},
 	];
 

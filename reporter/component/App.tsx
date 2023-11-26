@@ -1,7 +1,9 @@
 /* eslint-disable no-fallthrough */
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Spinner } from '@fluentui/react';
 import { IInputs } from '../generated/ManifestTypes';
-import { ChartType, IControlDescription } from '../types';
+import styles from './App.module.scss';
+import { ChartType, IAggregate, IAxes, IControlDescription, IData } from '../types';
 import { Dataservice } from '../services/Dataservice';
 import { Cartesian, Pie } from './Charts';
 
@@ -12,13 +14,23 @@ export interface IAppProps {
 
 export const App: React.FC<IAppProps> = (props: IAppProps) => {
 	const { context, controlProps } = props;
-	const { chartType, chartSubtitle } = context.parameters;
+	const { chartType, chartSubtitle, tableData } = context.parameters;
 	const title = controlProps?.ShowLabel ? controlProps.Label : null;
 
-	const service = new Dataservice();
-	const data = service.transformData(props.context.parameters.tableData);
-	const settings = service.getChartAxes(props.context.parameters);
-	const aggregate = service.aggregateData(data, settings);
+	const [data] = useState<IData[]>(Dataservice.transformData(tableData));
+	const [settings, setSettings] = useState<IAxes>(Dataservice.getChartAxes(context.parameters));
+	const [aggregate, setAggregate] = useState<IAggregate[]>();
+
+	useEffect(() => {
+		const loadData = async (): Promise<void> => {
+			const axes = await Dataservice.getChartColors(settings, tableData);
+			setSettings(axes);
+			setAggregate(Dataservice.aggregateData(data, axes));
+		};
+		loadData().catch((error) => {
+			context.navigation.openErrorDialog({ message: error.message, details: error.stack });
+		});
+	}, [context.navigation, data, settings, tableData]);
 
 	// No data or mock test env
 	if (!data.length || data[0].name === 'val') {
@@ -27,6 +39,11 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
 
 	// Default radius for Pie chart
 	let innerRadius = 0;
+
+	// Still loading?
+	if (!data || !settings || !aggregate) {
+		return <Spinner className={styles.loadingSpinner} />;
+	}
 
 	switch (chartType.raw) {
 		case ChartType.Donut:

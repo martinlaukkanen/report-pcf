@@ -1,6 +1,6 @@
 {
     "name": "report-pcf",
-    "version": "0.2.4",
+    "version": "0.2.7",
     "description": "Easy charts PowerApps Component",
     "scripts": {
         "build": "pcf-scripts build",
@@ -29,6 +29,7 @@
         "@typescript-eslint/eslint-plugin": "^5.39.0",
         "@typescript-eslint/parser": "^5.39.0",
         "cross-env": "^7.0.3",
+        "css-minimizer-webpack-plugin": "^5.0.1",
         "eslint": "^8.24.0",
         "eslint-config-airbnb": "^19.0.4",
         "eslint-config-prettier": "^9.0.0",
@@ -38,10 +39,15 @@
         "eslint-plugin-promise": "^6.0.1",
         "eslint-plugin-react": "^7.31.8",
         "eslint-plugin-react-hooks": "^4.6.0",
+        "mini-css-extract-plugin": "^2.7.6",
         "pcf-scripts": "^1",
         "pcf-start": "^1",
         "prettier": "^3.0.3",
         "react": "^16.8",
-        "typescript": "^4.8.4"
+        "sass": "^1.69.5",
+        "sass-loader": "^13.3.2",
+        "style-loader": "^3.3.3",
+        "typescript": "^4.8.4",
+        "typescript-plugin-css-modules": "^5.0.2"
     }
 }
