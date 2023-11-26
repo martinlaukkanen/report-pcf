@@ -74,32 +74,18 @@ export class Dataservice {
 			if (categoryColumn?.dataType === 'OptionSet') {
 				const choiceField = await this.getOptionSetValues(tableData.getTargetEntityType(), categoryColumn.name);
 				category.colors = choiceField?.OptionSet?.Options?.map((opt) => opt.Color);
+
+				category.options = choiceField?.OptionSet?.Options.map((opt) => ({
+					id: opt.Value,
+					label: opt.Label.UserLocalizedLabel.Label,
+					color: opt.Color,
+				}));
+
 				console.log(category);
 			}
 		}
 
 		return axes;
-	};
-
-	private static getOptionSetValues = async (
-		tableName: string,
-		fieldName: string
-	): Promise<IPicklistAttributeMetadata> => {
-		try {
-			const query =
-				`/api/data/v9.2/EntityDefinitions(LogicalName='${tableName}')/Attributes(LogicalName='${fieldName}')` +
-				`/Microsoft.Dynamics.CRM.PicklistAttributeMetadata?$select=LogicalName&$expand=OptionSet($select=Options)`;
-
-			const request = await fetch(query);
-
-			if (request.ok) {
-				return await request.json();
-			}
-
-			throw new Error(`Error loading OptionSet: ${request.status} ${request.statusText}`);
-		} catch (ex: any) {
-			throw new Error(ex.message);
-		}
 	};
 
 	public static aggregateData = (data: IData[], settings: IAxes): IAggregate[] => {
@@ -138,9 +124,46 @@ export class Dataservice {
 			return val;
 		});
 
+		// When colours used, ensure that all option sets used in series to ensure order of colours matches order of series data
+		if (settings.categories[0].colors) {
+			const { colors, options } = settings.categories[0];
+
+			colors.forEach((col) => {
+				const optionColour = options?.find((opt) => opt.color === col);
+
+				// If no data with this option remove the colour
+				// eslint-disable-next-line eqeqeq
+				if (optionColour?.color && !aggregated.find((a) => a.id == optionColour?.id)) {
+					const colIndex = colors.indexOf(optionColour.color);
+					colors.splice(colIndex, 1);
+				}
+			});
+		}
+
 		console.log(aggregated);
 
 		return aggregated;
+	};
+
+	private static getOptionSetValues = async (
+		tableName: string,
+		fieldName: string
+	): Promise<IPicklistAttributeMetadata> => {
+		try {
+			const query =
+				`/api/data/v9.2/EntityDefinitions(LogicalName='${tableName}')/Attributes(LogicalName='${fieldName}')` +
+				`/Microsoft.Dynamics.CRM.PicklistAttributeMetadata?$select=LogicalName&$expand=OptionSet($select=Options)`;
+
+			const request = await fetch(query);
+
+			if (request.ok) {
+				return await request.json();
+			}
+
+			throw new Error(`Error loading OptionSet: ${request.status} ${request.statusText}`);
+		} catch (ex: any) {
+			throw new Error(ex.message);
+		}
 	};
 
 	private static groupBy<T>(array: T[], key: keyof T): GroupedObjects<T> {

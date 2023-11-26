@@ -28,8 +28,9 @@ export const Chart: React.FC<IChartProps> = (props: IChartProps) => {
 		<div style={{ width: '100%', height: '100%' }}>
 			<AgChartsReact
 				options={{
-					title: titleConfig,
-					subtitle: subtitleConfig,
+					// Show title and sub title if both provided, otherwise show only one as title
+					title: titleConfig ?? subtitleConfig,
+					subtitle: titleConfig ? subtitleConfig : undefined,
 					// Series types are not all compatible so any
 					series: series as any,
 					autoSize: true,
