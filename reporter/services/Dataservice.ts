@@ -4,10 +4,24 @@ import { IAxes, IAggregate, IData, IPicklistAttributeMetadata } from '../types';
 type GroupedObjects<T> = { [key: string]: T[] };
 
 export class Dataservice {
-	public static transformData = (tableData: ComponentFramework.PropertyTypes.DataSet): IData[] => {
-		const data: IData[] = [];
+	public static transformData = async (tableData: ComponentFramework.PropertyTypes.DataSet): Promise<IData[]> => {
 		const { records, columns } = tableData;
 
+		const { paging } = tableData;
+		const data: IData[] = this.transformDataPage(records, columns);
+
+		if (paging.hasNextPage) {
+			paging.loadNextPage();
+		}
+
+		return data;
+	};
+
+	private static transformDataPage = (
+		records: any,
+		columns: ComponentFramework.PropertyHelper.DataSetApi.Column[]
+	): IData[] => {
+		const data: IData[] = [];
 		Object.keys(records).forEach((id) => {
 			const record = records[id];
 			const row: IData = {
@@ -100,7 +114,7 @@ export class Dataservice {
 			const id = grouped[category]?.[0]?.[categoryField.field]?.id?.guid ?? category;
 			// Get the formatted value of this label
 			const label =
-				grouped[category]?.[0]?.[categoryField.field].name ?? grouped[category]?.[0]?.[categoryField.field];
+				grouped[category]?.[0]?.[categoryField.field]?.name ?? grouped[category]?.[0]?.[categoryField.field];
 			const val: IAggregate = { id, label, [categoryField.field]: category };
 
 			switch (aggregate) {
@@ -128,19 +142,21 @@ export class Dataservice {
 		if (settings.categories[0].colors) {
 			const { colors, options } = settings.categories[0];
 
-			colors.forEach((col) => {
-				const optionColour = options?.find((opt) => opt.color === col);
+			if (colors?.length) {
+				[...colors].forEach((col) => {
+					const optionColour = options?.find((opt) => opt.color === col);
 
-				// If no data with this option remove the colour
-				// eslint-disable-next-line eqeqeq
-				if (optionColour?.color && !aggregated.find((a) => a.id == optionColour?.id)) {
-					const colIndex = colors.indexOf(optionColour.color);
-					colors.splice(colIndex, 1);
-				}
-			});
+					// If no data with this option remove the colour
+					// eslint-disable-next-line eqeqeq
+					if (optionColour?.color && !aggregated.find((a) => a.id == optionColour?.id)) {
+						const colIndex = colors.indexOf(optionColour.color);
+						colors.splice(colIndex, 1);
+					}
+				});
+			}
 		}
 
-		console.log(aggregated);
+		// console.log(aggregated, settings);
 
 		return aggregated;
 	};
