@@ -17,23 +17,27 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
 	const { chartType, chartSubtitle, tableData } = context.parameters;
 	const title = controlProps?.ShowLabel ? controlProps.Label : null;
 
-	const [data] = useState<IData[]>(Dataservice.transformData(tableData));
+	const [data, setData] = useState<IData[]>();
 	const [settings, setSettings] = useState<IAxes>(Dataservice.getChartAxes(context.parameters));
 	const [aggregate, setAggregate] = useState<IAggregate[]>();
 
 	useEffect(() => {
 		const loadData = async (): Promise<void> => {
+			const transformData = await Dataservice.transformData(tableData);
+			setData(transformData);
+
 			const axes = await Dataservice.getChartColors(settings, tableData);
 			setSettings(axes);
-			setAggregate(Dataservice.aggregateData(data, axes));
+
+			setAggregate(Dataservice.aggregateData(transformData, axes));
 		};
 		loadData().catch((error) => {
 			context.navigation.openErrorDialog({ message: error.message, details: error.stack });
 		});
-	}, [context.navigation, data, settings, tableData]);
+	}, [context.navigation, settings, tableData]);
 
 	// No data or mock test env
-	if (!data.length || data[0].name === 'val') {
+	if (!data?.length || data[0].name === 'val') {
 		return <span>No data!</span>;
 	}
 
@@ -41,7 +45,7 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
 	let innerRadius = 0;
 
 	// Still loading?
-	if (!data || !settings || !aggregate) {
+	if (!data || !settings || !aggregate || tableData.loading || data.length < tableData.paging.totalResultCount) {
 		return <Spinner className={styles.loadingSpinner} />;
 	}
 
