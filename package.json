@@ -1,6 +1,6 @@
 {
     "name": "report-pcf",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "description": "Easy charts PowerApps Component",
     "scripts": {
         "build": "pcf-scripts build",
