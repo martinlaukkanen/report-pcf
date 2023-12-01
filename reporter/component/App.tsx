@@ -1,11 +1,13 @@
 /* eslint-disable no-fallthrough */
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Spinner } from '@fluentui/react';
+import { AgChartTheme } from 'ag-charts-community';
 import { IInputs } from '../generated/ManifestTypes';
 import styles from './App.module.scss';
 import { ChartType, IAggregate, IAxes, IControlDescription, IData } from '../types';
 import { Dataservice } from '../services/Dataservice';
 import { Cartesian, Pie } from './Charts';
+import { Themeing } from './Themeing';
 
 export interface IAppProps {
 	context: ComponentFramework.Context<IInputs>;
@@ -14,17 +16,23 @@ export interface IAppProps {
 
 export const App: React.FC<IAppProps> = (props: IAppProps) => {
 	const { context, controlProps } = props;
-	const { chartType, chartSubtitle, tableData } = context.parameters;
+	const { chartType, chartSubtitle, tableData, theme, customTheme } = context.parameters;
 	const title = controlProps?.ShowLabel ? controlProps.Label : null;
 
 	const [data, setData] = useState<IData[]>();
 	const [settings, setSettings] = useState<IAxes>(Dataservice.getChartAxes(context.parameters));
 	const [aggregate, setAggregate] = useState<IAggregate[]>();
+	const [chartTheme] = useState<AgChartTheme>(Themeing.getTheme(theme?.raw, customTheme?.raw));
 
 	useEffect(() => {
 		const loadData = async (): Promise<void> => {
 			const transformData = await Dataservice.transformData(tableData);
 			setData(transformData);
+
+			// Still loading data?
+			if (transformData.length < tableData.paging.totalResultCount) {
+				return;
+			}
 
 			const axes = await Dataservice.getChartColors(settings, tableData);
 			setSettings(axes);
@@ -60,6 +68,7 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
 					title={title}
 					subtitle={chartSubtitle.raw}
 					innerRadius={innerRadius}
+					theme={chartTheme}
 				/>
 			);
 
@@ -73,6 +82,7 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
 					axes={settings}
 					title={title}
 					subtitle={chartSubtitle.raw}
+					theme={chartTheme}
 				/>
 			);
 

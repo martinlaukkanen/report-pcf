@@ -60,6 +60,7 @@ module.exports = {
 		'@typescript-eslint/no-explicit-any': 0,
 		'@typescript-eslint/no-var-requires': 0,
 		'@typescript-eslint/no-use-before-define': 2,
+		'react/jsx-props-no-spreading': 0,
 		'react/destructuring-assignment': 0,
 		'react/jsx-filename-extension': [
 			1,

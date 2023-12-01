@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml version="9.1.0.643" SolutionPackageVersion="9.1" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ImportExportXml version="9.1.0.643" SolutionPackageVersion="9.1" languagecode="1033" generatedBy="CrmLive"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<SolutionManifest>
 		<!-- Unique Name of Cds Solution-->
 		<UniqueName>EasyCharts</UniqueName>
@@ -8,7 +9,7 @@
 			<LocalizedName description="EasyCharts for PowerApps" languagecode="1033" />
 		</LocalizedNames>
 		<Descriptions />
-		<Version>0.2.8</Version>
+		<Version>0.3.0</Version>
 		<!-- Solution Package Type: Unmanaged(0)/Managed(1)/Both(2)-->
 		<Managed>2</Managed>
 		<Publisher>

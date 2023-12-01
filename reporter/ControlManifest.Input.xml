@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest>
-	<control namespace="nb" constructor="Reporter" version="0.2.8" display-name-key="Easy Charts" description-key="Easy Charts PowerApps Component" control-type="virtual">
+	<control namespace="nb" constructor="Reporter" version="0.3.0" display-name-key="Easy Charts" description-key="Easy Charts PowerApps Component" control-type="virtual">
 		<external-service-usage enabled="false">
 		</external-service-usage>
 		<data-set name="tableData" display-name-key="TableData_Display_Key" description-key="TableData_Desc_Key">
 		</data-set>
+		<property name="theme" display-name-key="Theme" description-key="" of-type="Enum" usage="input" required="false">
+			<value name="PowerApps" display-name-key="PowerAppsTheme">PowerAppsTheme</value>
+			<value name="Fluent" display-name-key="FluentTheme">FluentTheme</value>
+			<value name="Simple" display-name-key="SimpleTheme">SimpleTheme</value>
+			<value name="Custom" display-name-key="CustomTheme">CustomTheme</value>
+		</property>
+		<property name="customTheme" display-name-key="Custom Theme" description-key="Provide a comma separated list of HEX colors, e.g. #FF0000,#00FF00,#0000FF" of-type="SingleLine.Text" usage="input" required="false" />
 		<property name="chartType" display-name-key="Property_ChartType_Display_Name" description-key="Property_ChartType_Description" of-type="Enum" usage="input" required="true">
 			<value name="Donut" display-name-key="Property_ChartType_Donut_Display_Name">donut</value>
 			<value name="Pie" display-name-key="Property_ChartType_Pie_Display_Name">pie</value>
