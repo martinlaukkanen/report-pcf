@@ -10,9 +10,8 @@ export class Themeing {
 		const chartTheme = Themeing.selectChartTheme(theme, customTheme);
 
 		// Setup stroke colors
-		if (!chartTheme.palette?.strokes?.length) {
-			// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-			chartTheme.palette!.strokes =
+		if (!chartTheme.palette?.strokes?.length && chartTheme.palette) {
+			chartTheme.palette.strokes =
 				chartTheme.palette?.fills.map((color) => tinycolor(color).darken().toString()) ?? [];
 		}
 
