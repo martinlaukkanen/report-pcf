@@ -1,11 +1,13 @@
 import React from 'react';
+import { AgChartTheme } from 'ag-charts-community';
 import { IInputs, IOutputs } from './generated/ManifestTypes';
-import { App, IAppProps } from './component/App';
+import { App, IAppProps, Themeing } from './component';
 import { IControlDescription } from './types';
 
 export class Reporter implements ComponentFramework.ReactControl<IInputs, IOutputs> {
 	private theComponent: ComponentFramework.ReactControl<IInputs, IOutputs>;
 	private notifyOutputChanged: () => void;
+	private theme: AgChartTheme;
 
 	/**
 	 * Empty constructor.
@@ -25,6 +27,9 @@ export class Reporter implements ComponentFramework.ReactControl<IInputs, IOutpu
 		state: ComponentFramework.Dictionary
 	): void {
 		this.notifyOutputChanged = notifyOutputChanged;
+
+		const { theme, customTheme } = context.parameters;
+		this.theme = Themeing.getTheme(theme?.raw, customTheme?.raw);
 	}
 
 	/**
@@ -36,7 +41,7 @@ export class Reporter implements ComponentFramework.ReactControl<IInputs, IOutpu
 		// eslint-disable-next-line no-underscore-dangle
 		const controlProps: IControlDescription = (context.navigation as any)._customControlProperties?.descriptor;
 
-		const props: IAppProps = { context, controlProps };
+		const props: IAppProps = { context, controlProps, theme: this.theme };
 
 		return React.createElement(App, props);
 	}

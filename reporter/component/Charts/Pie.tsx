@@ -1,7 +1,7 @@
 import React from 'react';
 import { AgPolarSeriesOptions } from 'ag-charts-community';
 import tinycolor from 'tinycolor2';
-import { IChartBaseProps } from '../../types/IChartBaseProps';
+import { IChartBaseProps } from '../../types';
 import { Chart } from './Chart';
 
 export interface IPieProps extends IChartBaseProps {

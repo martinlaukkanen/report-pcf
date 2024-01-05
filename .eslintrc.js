@@ -91,5 +91,6 @@ module.exports = {
 			},
 		],
 		'import/no-unresolved': [2, { caseSensitive: false }],
+		'no-fallthrough': 0
 	},
 };

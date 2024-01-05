@@ -1,28 +1,26 @@
-/* eslint-disable no-fallthrough */
 import React, { useEffect, useState } from 'react';
 import { Spinner } from '@fluentui/react';
 import { AgChartTheme } from 'ag-charts-community';
 import { IInputs } from '../generated/ManifestTypes';
-import styles from './App.module.scss';
 import { ChartType, IAggregate, IAxes, IControlDescription, IData } from '../types';
-import { Dataservice } from '../services/Dataservice';
+import { Dataservice } from '../services';
 import { Cartesian, Pie } from './Charts';
-import { Themeing } from './Themeing';
+import styles from './App.module.scss';
 
 export interface IAppProps {
 	context: ComponentFramework.Context<IInputs>;
 	controlProps?: IControlDescription;
+	theme: AgChartTheme;
 }
 
 export const App: React.FC<IAppProps> = (props: IAppProps) => {
-	const { context, controlProps } = props;
-	const { chartType, chartSubtitle, tableData, theme, customTheme } = context.parameters;
+	const { context, controlProps, theme } = props;
+	const { chartType, chartSubtitle, tableData } = context.parameters;
 	const title = controlProps?.ShowLabel ? controlProps.Label : null;
 
 	const [data, setData] = useState<IData[]>();
 	const [settings, setSettings] = useState<IAxes>(Dataservice.getChartAxes(context.parameters));
 	const [aggregate, setAggregate] = useState<IAggregate[]>();
-	const [chartTheme] = useState<AgChartTheme>(Themeing.getTheme(theme?.raw, customTheme?.raw));
 
 	useEffect(() => {
 		const loadData = async (): Promise<void> => {
@@ -39,9 +37,7 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
 
 			setAggregate(Dataservice.aggregateData(transformData, axes));
 		};
-		loadData().catch((error) => {
-			context.navigation.openErrorDialog({ message: error.message, details: error.stack });
-		});
+		loadData().catch((error) => context.navigation.openErrorDialog({ message: error.message, details: error.stack }));
 	}, [context.navigation, settings, tableData]);
 
 	// No data or mock test env
@@ -53,7 +49,13 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
 	let innerRadius = 0;
 
 	// Still loading?
-	if (!data || !settings || !aggregate || tableData.loading || data.length < tableData.paging.totalResultCount) {
+	if (
+		!data ||
+		!settings ||
+		!aggregate ||
+		tableData.loading ||
+		data.length < tableData.paging.totalResultCount
+	) {
 		return <Spinner className={styles.loadingSpinner} />;
 	}
 
@@ -68,7 +70,7 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
 					title={title}
 					subtitle={chartSubtitle.raw}
 					innerRadius={innerRadius}
-					theme={chartTheme}
+					theme={theme}
 				/>
 			);
 
@@ -82,7 +84,7 @@ export const App: React.FC<IAppProps> = (props: IAppProps) => {
 					axes={settings}
 					title={title}
 					subtitle={chartSubtitle.raw}
-					theme={chartTheme}
+					theme={theme}
 				/>
 			);
 
