@@ -95,7 +95,7 @@ export class Dataservice {
 					color: opt.Color,
 				}));
 
-				console.log(category);
+				// console.debug(category);
 			}
 		}
 
@@ -156,7 +156,7 @@ export class Dataservice {
 			}
 		}
 
-		// console.log(aggregated, settings);
+		// console.debug(aggregated, settings);
 
 		return aggregated;
 	};
