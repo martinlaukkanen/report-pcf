@@ -87,15 +87,17 @@ Download the managed solution from [Releases](https://github.com/martinlaukkanen
 
 ## Adding a chart to a Form
 
-1. Open the desired form for editing in Makr
+1. Open the desired form for editing in [make.powerapps.com](https://make.powerapps.com)
 2. From the components menu under More components, add Easy Charts
 ![Config on Form](/assets/formconfig1.png)
-3. Configure component options as described in [Component configuration options](#component-configuration-options).
+3. Select the table and a view that contains all of the fields that you want to report on
+3. Configure component options as described in [Component configuration options](#component-configuration-options)
 
-| Tip: Set the Maximum number of rows property to 250 for faster initial loading of the chart ![Max rows](/assets/formconfig2.png)
+| Tip: Set the Maximum number of rows property to 250 for faster initial loading of the chart 
+![Max rows](/assets/formconfig2.png)
 
 ## Adding a chart to a Dashboard
-1. Open your (classic) Dashboard for editing in Make.
+1. Open your (classic) Dashboard for editing in [make.powerapps.com](https://make.powerapps.com)
 2. Add a list component to the 
 
 ![Edit dashboard](/assets/config1.png)
@@ -112,7 +114,7 @@ Download the managed solution from [Releases](https://github.com/martinlaukkanen
 
 ![Control properties](/assets/config4.png)
 
-Configure the chart properties as described in [Component configuration options](#component-configuration-options).
+6. Configure the chart properties as described in [Component configuration options](#component-configuration-options)
 
 # Contribute
 
