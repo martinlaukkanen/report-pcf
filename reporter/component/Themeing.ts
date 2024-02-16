@@ -1,6 +1,14 @@
 import { AgChartTheme } from 'ag-charts-community';
 import tinycolor from 'tinycolor2';
-import { FluentTheme, Overrides, PowerAppsTheme, SimpleTheme } from './Themes';
+import {
+	FluentTheme,
+	MaterialTheme,
+	Overrides,
+	PolychromaTheme,
+	PowerAppsTheme,
+	SheetsTheme,
+	SimpleTheme,
+} from './Themes';
 import { ITheme } from '../types';
 
 export class Themeing {
@@ -21,7 +29,8 @@ export class Themeing {
 		return chartTheme;
 	}
 
-	private static selectChartTheme(theme: string | null, customTheme: string | null): AgChartTheme {
+	private static selectChartTheme(theme: ITheme | null, customTheme: string | null): AgChartTheme {
+		// return PolychromaTheme;
 		switch (theme) {
 			case 'CustomTheme':
 				const chartTheme: AgChartTheme = {
@@ -44,6 +53,15 @@ export class Themeing {
 
 			case 'SimpleTheme':
 				return SimpleTheme;
+
+			case 'MaterialTheme':
+				return MaterialTheme;
+
+			case 'PolychromaTheme':
+				return PolychromaTheme;
+
+			case 'SheetsTheme':
+				return SheetsTheme;
 
 			default:
 				return Themeing.defaultTheme;

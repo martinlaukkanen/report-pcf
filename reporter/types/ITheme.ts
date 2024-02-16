@@ -1,1 +1,1 @@
-export type ITheme = 'PowerAppsTheme' | 'FluentTheme' | 'SimpleTheme' | 'CustomTheme';
+export type ITheme = 'PowerAppsTheme' | 'FluentTheme' | 'SimpleTheme' | 'CustomTheme' | 'MaterialTheme' | 'PolychromaTheme' | 'SheetsTheme';

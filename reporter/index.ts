@@ -28,8 +28,6 @@ export class Reporter implements ComponentFramework.ReactControl<IInputs, IOutpu
 	): void {
 		this.notifyOutputChanged = notifyOutputChanged;
 
-		const { theme, customTheme } = context.parameters;
-		this.theme = Themeing.getTheme(theme?.raw, customTheme?.raw);
 	}
 
 	/**
@@ -40,6 +38,9 @@ export class Reporter implements ComponentFramework.ReactControl<IInputs, IOutpu
 	public updateView(context: ComponentFramework.Context<IInputs>): React.ReactElement {
 		// eslint-disable-next-line no-underscore-dangle
 		const controlProps: IControlDescription = (context.navigation as any)._customControlProperties?.descriptor;
+		
+		const { theme, customTheme } = context.parameters;
+		this.theme = Themeing.getTheme(theme?.raw, customTheme?.raw);
 
 		const props: IAppProps = { context, controlProps, theme: this.theme };
 

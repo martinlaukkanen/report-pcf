@@ -9,6 +9,9 @@
 			<value name="PowerApps" display-name-key="PowerAppsTheme">PowerAppsTheme</value>
 			<value name="Fluent" display-name-key="FluentTheme">FluentTheme</value>
 			<value name="Simple" display-name-key="SimpleTheme">SimpleTheme</value>
+			<value name="Material" display-name-key="MaterialTheme">MaterialTheme</value>
+			<value name="Sheets" display-name-key="SheetsTheme">SheetsTheme</value>
+			<value name="Polychroma" display-name-key="PolychromaTheme">PolychromaTheme</value>
 			<value name="Custom" display-name-key="CustomTheme">CustomTheme</value>
 		</property>
 		<property name="customTheme" display-name-key="Custom Theme" description-key="Provide a comma separated list of HEX colors, e.g. #FF0000,#00FF00,#0000FF" of-type="SingleLine.Text" usage="input" required="false" />

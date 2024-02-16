@@ -39,7 +39,7 @@ export const Overrides: AgChartThemeOverrides = {
 				},
 			},
 		},
-	},	
+	},
 	area: {
 		series: {
 			highlightStyle: {
@@ -48,7 +48,7 @@ export const Overrides: AgChartThemeOverrides = {
 					strokeWidth: 2,
 				},
 			},
-		},		
+		},
 	},
 	line: {
 		series: {
@@ -60,5 +60,5 @@ export const Overrides: AgChartThemeOverrides = {
 				},
 			},
 		},
-	},	
+	},
 };

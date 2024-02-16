@@ -11,13 +11,16 @@ export interface IPieProps extends IChartBaseProps {
 export const Pie = React.memo<IPieProps>(function Pie(props: IPieProps) {
 	const { axes, innerRadius } = props;
 
+	// Adjust font size of callout based on dataset
+	const calloutLabelSize = props.data.length > 8 ? 10 : 12;
+
 	const series: AgPieSeriesOptions[] = [
 		{
 			type: 'pie',
 			calloutLabelKey: axes.categories[0].label,
 			angleKey: axes.series[0].field,
 			innerRadiusRatio: innerRadius,
-			
+			calloutLabel: { fontSize: calloutLabelSize }			
 		},
 	];
 
