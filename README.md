@@ -5,6 +5,17 @@ Easy Reports is a PowerApps component to add chart components to your Dashboards
 
 ![FormEg](/assets/screenshot-form1.png)
 
+- [Features](#features)
+   * [Chart Types](#chart-types)
+   * [Theming](#theming)
+- [Installation](#installation)
+- [Usage](#usage)
+   * [Component configuration options](#component-configuration-options)
+   * [Adding a chart to a Dashboard](#adding-a-chart-to-a-dashboard)   
+   * [Adding a chart to a Form](#adding-a-chart-to-a-form)
+- [Contribute](#contribute)
+- [Disclaimer](#disclaimer)
+
 # Features
 Easy Reports can be used in place of the out-of-the-box charts or side-by side and adds some additional features not found in the default charts, including:
 
@@ -60,6 +71,20 @@ Additionally Choice value colours are automatically used in charts, when the cha
 Download the managed solution from [Releases](https://github.com/martinlaukkanen/report-pcf/releases/) and import into your environment in https://make.powerapps.com 
 
 # Usage
+## Component configuration options
+| Option | Description
+| --- | ---
+| Theme | Select your desired theme
+| Custom Theme | Enter comma separated RGB colors for a custom theme, e.g. #FF0000,#00FF00,#0000FF
+| Chart type | Select your desired chart type
+| Chart Subtitle | Subtitle text will be shown below the charts list title
+| Series 1 | Table field name of the values to show (the measure)
+| Series 1 Aggregation | How to aggregate the values (avg, sum, count, etc)
+| Series 2 | NOT YET IMPLEMENTED
+| Series 2 Aggregation | NOT YET IMPLEMENTED
+| Category 1 | Table field name of the values to group by (the dimension)
+| Category 2 | NOT YET IMPLEMENTED
+
 ## Adding a chart to a Dashboard
 1. Open your (classic) Dashboard for editing in Make.
 2. Add a list component to the 
@@ -78,29 +103,14 @@ Download the managed solution from [Releases](https://github.com/martinlaukkanen
 
 ![Control properties](/assets/config4.png)
 
-Configure the chart properties as described in the following section.
-
-### Component configuration options
-| Option | Description
-| --- | ---
-| Theme | Select your desired theme
-| Custom Theme | Enter comma separated RGB colors for a custom theme, e.g. #FF0000,#00FF00,#0000FF
-| Chart type | Select your desired chart type
-| Chart Subtitle | Subtitle text will be shown below the charts list title
-| Series 1 | Table field name of the values to show (the measure)
-| Series 1 Aggregation | How to aggregate the values (avg, sum, count, etc)
-| Series 2 | NOT YET IMPLEMENTED
-| Series 2 Aggregation | NOT YET IMPLEMENTED
-| Category 1 | Table field name of the values to group by (the dimension)
-| Category 2 | NOT YET IMPLEMENTED
-
+Configure the chart properties as described in [Component configuration options](#component-configuration-options).
 
 ## Adding a chart to a Form
 
 1. Open the desired form for editing in Makr
 2. From the components menu under More components, add Easy Charts
 ![Config on Form](/assets/formconfig1.png)
-3. Configure component options as described above.
+3. Configure component options as described in [Component configuration options](#component-configuration-options).
 
 | Tip: Set the Maximum number of rows property to 250 for faster initial loading of the chart
 ![Max rows](/assets/formconfig2.png)
