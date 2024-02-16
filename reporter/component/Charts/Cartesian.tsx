@@ -8,9 +8,9 @@ export const Cartesian = React.memo<ICartesianProps>(function Cartesian(props: I
 	const category1 = axes.categories[0];
 	const series1 = axes.series[0].field;
 
-	const series: AgCartesianSeriesOptions<never>[] = [
+	const series: AgCartesianSeriesOptions[] = [
 		{
-			type,
+			type: type as any,
 			xKey: category1.label,
 			yKey: series1,
 		},

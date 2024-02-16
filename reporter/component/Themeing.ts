@@ -12,7 +12,7 @@ export class Themeing {
 		// Setup stroke colors
 		if (!chartTheme.palette?.strokes?.length && chartTheme.palette) {
 			chartTheme.palette.strokes =
-				chartTheme.palette?.fills.map((color) => tinycolor(color).darken().toString()) ?? [];
+				chartTheme.palette?.fills?.map((color) => tinycolor(color).darken().toString()) ?? [];
 		}
 
 		// Setup standard style overrieds

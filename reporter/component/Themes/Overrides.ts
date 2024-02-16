@@ -1,7 +1,9 @@
+import { AgChartThemeOverrides, AgPieSeriesThemeOverrides } from 'ag-charts-community';
+
 const MSFonts =
 	'"Segoe UI", "Segoe UI Web (West European)", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif';
 
-export const Overrides = {
+export const Overrides: AgChartThemeOverrides = {
 	common: {
 		title: {
 			fontFamily: MSFonts,
@@ -12,40 +14,51 @@ export const Overrides = {
 			fontFamily: MSFonts,
 			fontSize: 14,
 		},
+	},
+	pie: {
 		series: {
-			pie: {
-				highlightStyle: {
-					item: {
-						fill: 'white',
-						fillOpacity: 0.4,
-						strokeWidth: 2,
-					},
-				},
-			},
-			bar: {
-				highlightStyle: {
-					item: {
-						fill: 'white',
-						fillOpacity: 0.4,
-						strokeWidth: 2,
-					},
-					series: {
-						dimOpacity: 0.3,
-					},
-				},
-			},
-			column: {
-				highlightStyle: {
-					item: {
-						fill: 'white',
-						fillOpacity: 0.4,
-						strokeWidth: 2,
-					},
-					series: {
-						dimOpacity: 0.3,
-					},
+			highlightStyle: {
+				item: {
+					fill: 'white',
+					fillOpacity: 0.4,
+					strokeWidth: 2,
 				},
 			},
 		},
 	},
+	bar: {
+		series: {
+			highlightStyle: {
+				item: {
+					fill: 'white',
+					fillOpacity: 0.4,
+					strokeWidth: 2,
+				},
+				series: {
+					dimOpacity: 0.3,
+				},
+			},
+		},
+	},	
+	area: {
+		series: {
+			highlightStyle: {
+				series: {
+					dimOpacity: 0.3,
+					strokeWidth: 2,
+				},
+			},
+		},		
+	},
+	line: {
+		series: {
+			highlightStyle: {
+				item: {
+					fill: 'white',
+					fillOpacity: 0.4,
+					strokeWidth: 6,
+				},
+			},
+		},
+	},	
 };

@@ -5,7 +5,7 @@ import { IChartBaseProps } from '../../types';
 import styles from './Chart.module.scss';
 
 export interface IChartProps extends IChartBaseProps {
-	series?: AgCartesianSeriesOptions<never>[] | AgPolarSeriesOptions[];
+	series?: AgCartesianSeriesOptions[] | AgPolarSeriesOptions[];
 }
 
 export const Chart: React.FC<IChartProps> = (props: IChartProps) => {

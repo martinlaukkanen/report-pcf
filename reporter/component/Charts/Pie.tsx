@@ -1,5 +1,5 @@
 import React from 'react';
-import { AgPolarSeriesOptions } from 'ag-charts-community';
+import { AgPieSeriesOptions } from 'ag-charts-community';
 import tinycolor from 'tinycolor2';
 import { IChartBaseProps } from '../../types';
 import { Chart } from './Chart';
@@ -11,12 +11,13 @@ export interface IPieProps extends IChartBaseProps {
 export const Pie = React.memo<IPieProps>(function Pie(props: IPieProps) {
 	const { axes, innerRadius } = props;
 
-	const series: AgPolarSeriesOptions[] = [
+	const series: AgPieSeriesOptions[] = [
 		{
 			type: 'pie',
 			calloutLabelKey: axes.categories[0].label,
 			angleKey: axes.series[0].field,
 			innerRadiusRatio: innerRadius,
+			
 		},
 	];
 
