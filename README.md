@@ -85,6 +85,15 @@ Download the managed solution from [Releases](https://github.com/martinlaukkanen
 | Category 1 | Table field name of the values to group by (the dimension)
 | Category 2 | NOT YET IMPLEMENTED
 
+## Adding a chart to a Form
+
+1. Open the desired form for editing in Makr
+2. From the components menu under More components, add Easy Charts
+![Config on Form](/assets/formconfig1.png)
+3. Configure component options as described in [Component configuration options](#component-configuration-options).
+
+| Tip: Set the Maximum number of rows property to 250 for faster initial loading of the chart ![Max rows](/assets/formconfig2.png)
+
 ## Adding a chart to a Dashboard
 1. Open your (classic) Dashboard for editing in Make.
 2. Add a list component to the 
@@ -104,16 +113,6 @@ Download the managed solution from [Releases](https://github.com/martinlaukkanen
 ![Control properties](/assets/config4.png)
 
 Configure the chart properties as described in [Component configuration options](#component-configuration-options).
-
-## Adding a chart to a Form
-
-1. Open the desired form for editing in Makr
-2. From the components menu under More components, add Easy Charts
-![Config on Form](/assets/formconfig1.png)
-3. Configure component options as described in [Component configuration options](#component-configuration-options).
-
-| Tip: Set the Maximum number of rows property to 250 for faster initial loading of the chart
-![Max rows](/assets/formconfig2.png)
 
 # Contribute
 
