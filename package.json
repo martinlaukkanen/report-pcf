@@ -1,7 +1,13 @@
 {
     "name": "report-pcf",
     "version": "0.9.3",
-    "description": "Easy charts PowerApps Component",
+    "description": "Easy Reports is a PowerApps component to add chart components to your Dashboards and Forms in a Model Driven app",
+    "license": "MIT",
+    "homepage": "https://github.com/martinlaukkanen/report-pcf?tab=readme-ov-file#readme",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/martinlaukkanen/report-pcf.git"
+    },
     "scripts": {
         "build": "pcf-scripts build",
         "clean": "pcf-scripts clean",
