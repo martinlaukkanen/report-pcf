@@ -30,7 +30,6 @@ export class Themeing {
 	}
 
 	private static selectChartTheme(theme: ITheme | null, customTheme: string | null): AgChartTheme {
-		// return PolychromaTheme;
 		switch (theme) {
 			case 'CustomTheme':
 				const chartTheme: AgChartTheme = {

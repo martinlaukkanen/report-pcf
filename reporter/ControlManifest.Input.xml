@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest>
-	<control namespace="nb" constructor="Reporter" version="0.3.2" display-name-key="Easy Charts" description-key="Easy Charts PowerApps Component" control-type="virtual">
+	<control namespace="nb" constructor="Reporter" version="0.9.3" display-name-key="Easy Charts" description-key="Easy Charts PowerApps Component" control-type="virtual">
 		<external-service-usage enabled="false">
 		</external-service-usage>
 		<data-set name="tableData" display-name-key="TableData_Display_Key" description-key="TableData_Desc_Key">

@@ -20,12 +20,38 @@ Easy Reports supports the following chart types:
 - Bubble (future release)
 
 ## Theming
-Easy Reports supports three themes, and a custom option; 
+Easy Reports supports multiple themes, a fully customisable theme option and automatically using data choice value colours; 
 
 - Simple (A basic starter theme)
+
+![Simple](/assets/simple-theme.png)
+
 - PowerApps (styled on Microsoft PowerApps purple colour)
+
+![PowerApps](/assets/powerapps-theme.png)
+
 - Fluent (styled on Microsoft's Fluent UI style guide used across all Microsoft products)
+
+![Fluent](/assets/fluent-theme.png)
+
+- Material (A Google Material styled theme)
+
+![Material](/assets/material-theme.png)
+
+- Sheets (A Google Sheets inspired theme)
+
+![Sheets](/assets/sheets-theme.png)
+
+- Polychroma (A bright theme)
+
+![Polychroma](/assets/polychroma-theme.png)
+
 - Custom (fully custom theme based on your own colour palette)
 
 Additionally Choice value colours are automatically used in charts, when the chart is displaying the data related to that option set.
 
+![Data](/assets/data-theme.png)
+
+# Installation
+
+Download the managed solution here and import into your environment.

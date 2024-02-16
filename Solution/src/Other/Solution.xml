@@ -8,7 +8,7 @@
 			<LocalizedName description="EasyCharts for PowerApps" languagecode="1033" />
 		</LocalizedNames>
 		<Descriptions />
-		<Version>0.3.2</Version>
+		<Version>0.9.3</Version>
 		<!-- Solution Package Type: Unmanaged(0)/Managed(1)/Both(2)-->
 		<Managed>2</Managed>
 		<Publisher>
